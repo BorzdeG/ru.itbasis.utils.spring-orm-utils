@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+!.idea/
+.idea/*
+!.idea/runConfigurations/
+!.idea/vcs.xml
+!.idea/encodings.xml
+!.idea/compiler.xml
+!.idea/codeStyleSettings.xml
+*.iml
+
+.mvn/timing.properties
+
+target/
+config/
