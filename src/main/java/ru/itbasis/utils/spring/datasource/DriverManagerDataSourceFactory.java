@@ -25,13 +25,13 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.math.NumberUtils.INTEGER_ZERO;
 import static org.springframework.util.StringUtils.isEmpty;
 
-// FIXME Вынести создание туннеля в отдельный бин с уникальностью по {@link ru.itbasis.utils.spring.datasource.AbstractDataSourceProperties.SshProxyProperties#toString()}
+// FIXME Вынести создание туннеля в отдельный бин с уникальностью по {@link AbstractDataSourceProperties.SshProxyProperties#toString()}
 @Slf4j
 public class DriverManagerDataSourceFactory extends AbstractFactoryBean<DriverManagerDataSource> {
-	private static final BiPredicate<Function<AbstractDataSourceProperties, String>, AbstractDataSourceProperties>  STRING_IS_NOT_EMPTY = (fn, e) -> !isEmpty(
-		fn.apply(e));
-	private static final BiPredicate<Function<AbstractDataSourceProperties, Integer>, AbstractDataSourceProperties> INTEGER_IS_NOT_ZERO = (fn, e) ->
-		fn.apply(e) > 0;
+	private static final BiPredicate<Function<AbstractDataSourceProperties, String>, AbstractDataSourceProperties>  STRING_IS_NOT_EMPTY =
+		(fn, e) -> !isEmpty(fn.apply(e));
+	private static final BiPredicate<Function<AbstractDataSourceProperties, Integer>, AbstractDataSourceProperties> INTEGER_IS_NOT_ZERO =
+		(fn, e) -> fn.apply(e) > 0;
 
 	@Getter
 	private AbstractDataSourceProperties[] dataSourceProperties;
@@ -44,6 +44,7 @@ public class DriverManagerDataSourceFactory extends AbstractFactoryBean<DriverMa
 		final int    tunnelLocalPort  = getProperty(e -> e.getTunnel().getLocalPort(), INTEGER_IS_NOT_ZERO, INTEGER_ZERO);
 		final String tunnelHost       = getProperty(e -> e.getTunnel().getHost(), STRING_IS_NOT_EMPTY, EMPTY);
 		final int    tunnelRemotePort = getProperty(e -> e.getTunnel().getRemotePort(), INTEGER_IS_NOT_ZERO, INTEGER_ZERO);
+		@SuppressWarnings("checkstyle:multipleStringLiterals")
 		final String tunnel           = tunnelLocalPort + ":" + tunnelHost + ":" + tunnelRemotePort;
 		if (ArrayUtils.contains(portForwardingL, tunnel)) {
 			log.warn("tunnel '{}' is exists.", tunnel);
@@ -132,7 +133,7 @@ public class DriverManagerDataSourceFactory extends AbstractFactoryBean<DriverMa
 	}
 
 	@Required
-	public void setDataSourceProperties(AbstractDataSourceProperties... dataSourceProperties) {
+	public void setDataSourceProperties(final AbstractDataSourceProperties... dataSourceProperties) {
 		this.dataSourceProperties = dataSourceProperties;
 	}
 }

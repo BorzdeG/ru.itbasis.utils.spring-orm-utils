@@ -14,7 +14,7 @@ import java.util.function.BiFunction;
 public class LocalContainerEntityManagerFactoryBeanFunction
 	implements BiFunction<DataSource, AbstractDataSourceProperties[], LocalContainerEntityManagerFactoryBean> {
 	@Override
-	public LocalContainerEntityManagerFactoryBean apply(DataSource dataSource, AbstractDataSourceProperties... dataSourceProperties) {
+	public LocalContainerEntityManagerFactoryBean apply(final DataSource dataSource, final AbstractDataSourceProperties... dataSourceProperties) {
 		final LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
 
 		bean.setJpaDialect(getJpaDialect());

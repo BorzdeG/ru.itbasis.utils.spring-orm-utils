@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 @Slf4j
 @Data
 @ConfigurationProperties
-abstract public class AbstractDataSourceProperties {
+public abstract class AbstractDataSourceProperties {
 	@NestedConfigurationProperty
 	private JdbcProperties   jdbc   = new JdbcProperties();
 	@NestedConfigurationProperty
@@ -48,6 +48,7 @@ abstract public class AbstractDataSourceProperties {
 		private int    port;
 
 		@Override
+		@SuppressWarnings("checkstyle:multipleStringLiterals")
 		public String toString() {
 			return "sshProxy[" + username + "@" + host + ":" + port + "]";
 		}
@@ -60,11 +61,13 @@ abstract public class AbstractDataSourceProperties {
 		private int    remotePort;
 		private int    localPort;
 
+		@SuppressWarnings("checkstyle:multipleStringLiterals")
 		public String getAsString() {
 			return localPort + ":" + host + ":" + remotePort;
 		}
 
 		@Override
+		@SuppressWarnings("checkstyle:multipleStringLiterals")
 		public String toString() {
 			return "tunnel[" + getAsString() + "]";
 		}

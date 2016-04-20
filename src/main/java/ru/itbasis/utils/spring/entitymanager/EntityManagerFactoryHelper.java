@@ -18,7 +18,7 @@ public class EntityManagerFactoryHelper {
 																																							 final DataSource dataSource,
 																																							 final JpaVendorAdapter jpaVendorAdapter,
 																																							 final String[] entityPackagesToScan,
-																																							 AbstractDataSourceProperties... dataSourceProperties) {
+																																							 final AbstractDataSourceProperties... dataSourceProperties) {
 		final LocalContainerEntityManagerFactoryBean bean = entityManagerFactoryBeanFunction.apply(dataSource, dataSourceProperties);
 		bean.setJpaVendorAdapter(jpaVendorAdapter);
 		bean.setPersistenceUnitName(unitName);
